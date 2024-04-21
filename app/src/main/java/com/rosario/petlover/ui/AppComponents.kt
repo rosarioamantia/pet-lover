@@ -15,6 +15,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.unit.TextUnit
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.rosario.petlover.R
@@ -31,6 +32,7 @@ fun TopBar(text: String){
             fontWeight = FontWeight.Medium
         )
 
+        //to subdivide and put spacing
         Spacer(modifier = Modifier.weight(1f))
 
         Image(
@@ -38,6 +40,17 @@ fun TopBar(text: String){
             painter = painterResource(id = R.drawable.android_symbol_green),
             contentDescription = "Native Mobile Bits")
     }
+}
+
+@Composable
+fun TextComponent(textValue: String,
+                  textSize: TextUnit,
+                  color: Color = Color.Black){
+    Text(
+        text = textValue,
+        fontSize = textSize,
+        color = color
+    )
 }
 
 @Preview(showBackground = true)
