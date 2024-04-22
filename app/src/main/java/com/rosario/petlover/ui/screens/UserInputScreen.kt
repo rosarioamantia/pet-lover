@@ -12,13 +12,18 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
 import com.rosario.petlover.ui.TextComponent
 import com.rosario.petlover.ui.TopBar
+import com.rosario.petlover.ui.UserInputViewModel
 
 @Composable
 fun UserInputScreen(navController: NavHostController){
+    val userInputViewModel = viewModel<UserInputViewModel>()
+    val state = userInputViewModel.state
+
     Surface(modifier = Modifier.fillMaxSize()) {
         Column(
             modifier = Modifier

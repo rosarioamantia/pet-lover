@@ -47,7 +47,7 @@ fun TextComponent(textValue: String,
     Text(
         text = textValue,
         fontSize = textSize,
-        color = color
+        color = color,
     )
 }
 
