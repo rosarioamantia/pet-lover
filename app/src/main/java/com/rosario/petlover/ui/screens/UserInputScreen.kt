@@ -1,8 +1,10 @@
 package com.rosario.petlover.ui.screens
 
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.material3.Surface
@@ -12,17 +14,16 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import androidx.lifecycle.viewmodel.compose.viewModel
-import androidx.navigation.NavHostController
-import androidx.navigation.compose.rememberNavController
+import com.rosario.petlover.R
+import com.rosario.petlover.data.UserDataUiAction
+import com.rosario.petlover.ui.AnimalCard
 import com.rosario.petlover.ui.TextComponent
+import com.rosario.petlover.ui.TextFieldComponent
 import com.rosario.petlover.ui.TopBar
 import com.rosario.petlover.ui.UserInputViewModel
 
 @Composable
-fun UserInputScreen(navController: NavHostController){
-    val userInputViewModel = viewModel<UserInputViewModel>()
-    val state = userInputViewModel.state
+fun UserInputScreen(userInputViewModel: UserInputViewModel){
 
     Surface(modifier = Modifier.fillMaxSize()) {
         Column(
@@ -42,7 +43,24 @@ fun UserInputScreen(navController: NavHostController){
 
             Spacer(modifier = Modifier.size(60.dp))
 
-           // TextField(value = "ciao", onValueChange = )
+            TextFieldComponent(onTextChanged = {
+                userInputViewModel.onEvent(
+                    UserDataUiAction.UserNameEntered(it)
+                )
+            })
+
+            Spacer(modifier = Modifier.size(30.dp))
+
+            TextComponent(
+                textValue = "What do you like?",
+                textSize = 18.sp)
+
+            Spacer(modifier = Modifier.size(20.dp))
+
+            Row(modifier = Modifier.fillMaxWidth()) {
+                AnimalCard(R.drawable.pixel_cat)
+                AnimalCard(R.drawable.pixel_dog)
+            }
         }
     }
 }
@@ -50,5 +68,5 @@ fun UserInputScreen(navController: NavHostController){
 @Preview
 @Composable
 fun UserInputScreenPreview(){
-    UserInputScreen(rememberNavController())
+    UserInputScreen(UserInputViewModel())
 }

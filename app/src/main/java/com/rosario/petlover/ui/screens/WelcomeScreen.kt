@@ -10,9 +10,10 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
 import com.rosario.petlover.ui.TopBar
+import com.rosario.petlover.ui.UserInputViewModel
 
 @Composable
-fun WelcomeScreen(navController: NavHostController){
+fun WelcomeScreen(navController: NavHostController, userInputViewModel: UserInputViewModel){
     Surface(
         modifier = Modifier
             .fillMaxSize()
@@ -27,5 +28,5 @@ fun WelcomeScreen(navController: NavHostController){
 @Preview
 @Composable
 fun WelcomeScreenPreview(){
-    WelcomeScreen(rememberNavController())
+    //WelcomeScreen(rememberNavController())
 }
