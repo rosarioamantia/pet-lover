@@ -116,11 +116,12 @@ fun AnimalCard(
         elevation = CardDefaults.cardElevation(4.dp)
     ){
         Box(
-            modifier = Modifier.fillMaxSize()
+            modifier = Modifier
+                .fillMaxSize()
                 .border(
                     shape = RoundedCornerShape(10.dp),
                     width = 2.dp,
-                    color = if(selected) Color.Green else Color.Transparent
+                    color = if (selected) Color.Green else Color.Transparent
                 )
         ){
             Image(
@@ -128,15 +129,23 @@ fun AnimalCard(
                     .padding(5.dp)
                     .wrapContentWidth()
                     .wrapContentHeight()
-                    .clickable{
-                        val animalName = if(image == R.drawable.pixel_cat) "Cat" else "Dog"
+                    .clickable {
+                        val animalName = if (image == R.drawable.pixel_cat) "Cat" else "Dog"
                         animalSelected(animalName) //call it to trigger the function defined inside @Composable
                     },
                 painter = painterResource(id = image),
                 contentDescription = "Animal image")
         }
     }
+}
 
+@Preview(showBackground = false)
+@Composable
+fun AnimalCardPreview(){
+    AnimalCard(
+        image = R.drawable.pixel_dog,
+        selected = false,
+        animalSelected = { "Dog" })
 }
 
 

@@ -1,5 +1,6 @@
 package com.rosario.petlover.ui
 
+import android.util.Log
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
@@ -8,6 +9,9 @@ import com.rosario.petlover.data.UserDataUiAction
 import com.rosario.petlover.data.UserInputState
 
 class UserInputViewModel : ViewModel(){
+    companion object{
+        const val TAG = "UserInputViewModel"
+    }
 
     var state by mutableStateOf(UserInputState()) //is both possibile to assign with =
         private set
@@ -23,6 +27,8 @@ class UserInputViewModel : ViewModel(){
         state = state.copy(
             nameEntered = name
         )
+        Log.d(TAG, "onEvent:UserNameEntered -> ")
+        Log.d(TAG, "${state.nameEntered}")
         return
     }
 
@@ -30,6 +36,8 @@ class UserInputViewModel : ViewModel(){
         state = state.copy(
             animalSelected = animalValue
         )
+        Log.d(TAG, "onEvent:AnimalSelected -> ")
+        Log.d(TAG, "${state.animalSelected}")
         return
     }
 }
