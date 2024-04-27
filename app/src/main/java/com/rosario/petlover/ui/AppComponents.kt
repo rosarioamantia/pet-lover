@@ -2,13 +2,18 @@ package com.rosario.petlover.ui
 
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.border
+import androidx.compose.foundation.clickable
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.wrapContentHeight
 import androidx.compose.foundation.layout.wrapContentWidth
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.KeyboardActions
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material3.Card
@@ -71,7 +76,7 @@ fun TextComponent(textValue: String,
 
 @Composable
 fun TextFieldComponent(
-    onTextChanged: (name: String) -> Unit
+    onTextChanged: (name: String) -> Unit //higher-order-functions (onTextChanged) can accept lambda as parameter
 ){
     var currentValue by remember{
         mutableStateOf("")
@@ -83,7 +88,7 @@ fun TextFieldComponent(
         value = currentValue,
         onValueChange = {
             currentValue = it //local value
-            onTextChanged(it) //effective call
+            onTextChanged(it) //effective call - //call it to trigger the function defined inside @Composable
         },
         placeholder = {
             Text(text = "Enter your name")
@@ -99,30 +104,41 @@ fun TextFieldComponent(
 }
 
 @Composable
-fun AnimalCard(image: Int){
+fun AnimalCard(
+    image: Int,
+    selected: Boolean,
+    animalSelected: (animalName: String) -> Unit){ //higher-order-functions (animalSelected) can accept lambda as parameter
     Card (
+        shape = RoundedCornerShape(10.dp),
         modifier = Modifier
             .padding(24.dp)
             .size(130.dp),
-        elevation = CardDefaults.cardElevation(4.dp),
-
+        elevation = CardDefaults.cardElevation(4.dp)
     ){
-        Image(
-            modifier = Modifier
-                .padding(5.dp)
-                .wrapContentWidth()
-                .wrapContentHeight(),
-            painter = painterResource(id = image),
-            contentDescription = "Animal image")
+        Box(
+            modifier = Modifier.fillMaxSize()
+                .border(
+                    shape = RoundedCornerShape(10.dp),
+                    width = 2.dp,
+                    color = if(selected) Color.Green else Color.Transparent
+                )
+        ){
+            Image(
+                modifier = Modifier
+                    .padding(5.dp)
+                    .wrapContentWidth()
+                    .wrapContentHeight()
+                    .clickable{
+                        val animalName = if(image == R.drawable.pixel_cat) "Cat" else "Dog"
+                        animalSelected(animalName) //call it to trigger the function defined inside @Composable
+                    },
+                painter = painterResource(id = image),
+                contentDescription = "Animal image")
+        }
     }
 
 }
 
-@Preview(showBackground = false)
-@Composable
-fun AnimalCardPreview(){
-    AnimalCard(R.drawable.pixel_cat)
-}
 
 @Preview(showBackground = true)
 @Composable

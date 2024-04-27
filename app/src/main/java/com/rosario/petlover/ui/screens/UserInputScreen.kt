@@ -58,8 +58,22 @@ fun UserInputScreen(userInputViewModel: UserInputViewModel){
             Spacer(modifier = Modifier.size(20.dp))
 
             Row(modifier = Modifier.fillMaxWidth()) {
-                AnimalCard(R.drawable.pixel_cat)
-                AnimalCard(R.drawable.pixel_dog)
+                AnimalCard(
+                    R.drawable.pixel_cat,
+                    animalSelected = {
+                        userInputViewModel.onEvent(
+                            UserDataUiAction.AnimalSelected(it) //update state
+                        )
+                    },
+                    selected = userInputViewModel.state.animalSelected.equals("Cat")) //read state to trigger border card color logic
+                AnimalCard(
+                    R.drawable.pixel_dog,
+                    animalSelected = {
+                        userInputViewModel.onEvent(
+                            UserDataUiAction.AnimalSelected(it) //update state
+                        )
+                    },
+                    selected = userInputViewModel.state.animalSelected.equals("Dog")) //read state to trigger border card color logic
             }
         }
     }
