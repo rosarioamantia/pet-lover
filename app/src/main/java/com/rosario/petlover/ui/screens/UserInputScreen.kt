@@ -1,5 +1,6 @@
 package com.rosario.petlover.ui.screens
 
+import android.widget.Toast
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
@@ -11,12 +12,14 @@ import androidx.compose.material3.Surface
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.rosario.petlover.R
 import com.rosario.petlover.data.UserDataUiAction
 import com.rosario.petlover.ui.AnimalCard
+import com.rosario.petlover.ui.ButtonComponent
 import com.rosario.petlover.ui.TextComponent
 import com.rosario.petlover.ui.TextFieldComponent
 import com.rosario.petlover.ui.TopBar
@@ -26,6 +29,7 @@ import com.rosario.petlover.ui.UserInputViewModel
 fun UserInputScreen(userInputViewModel: UserInputViewModel){
 
     Surface(modifier = Modifier.fillMaxSize()) {
+        val context = LocalContext.current
         Column(
             modifier = Modifier
                 .fillMaxSize()
@@ -60,7 +64,7 @@ fun UserInputScreen(userInputViewModel: UserInputViewModel){
             Row(modifier = Modifier.fillMaxWidth()) {
                 AnimalCard(
                     R.drawable.pixel_cat,
-                    animalSelected = {
+                    animalSelected = {//callback inside {} with Lambda function
                         userInputViewModel.onEvent(
                             UserDataUiAction.AnimalSelected(it) //update state
                         )
@@ -68,12 +72,23 @@ fun UserInputScreen(userInputViewModel: UserInputViewModel){
                     selected = userInputViewModel.state.animalSelected.equals("Cat")) //read state to trigger border card color logic
                 AnimalCard(
                     R.drawable.pixel_dog,
-                    animalSelected = {
+                    animalSelected = {//callback insicallback inside {} with Lambda function
                         userInputViewModel.onEvent(
                             UserDataUiAction.AnimalSelected(it) //update state
                         )
                     },
                     selected = userInputViewModel.state.animalSelected.equals("Dog")) //read state to trigger border card color logic
+            }
+
+            Spacer(modifier = Modifier.weight(1f))
+
+            if(userInputViewModel.isValidState()) {
+                ButtonComponent(
+                    goToDetailsScreen = { //callback inside {} with Lambda function
+                        Toast.makeText(context, "called goToDetailsScreen()", Toast.LENGTH_LONG).show()
+                        Toast.makeText(context, "your name is ${userInputViewModel.state.nameEntered}" +
+                                " and your animal is a ${userInputViewModel.state.animalSelected}", Toast.LENGTH_LONG).show()
+                })
             }
         }
     }

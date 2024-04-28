@@ -1,6 +1,5 @@
 package com.rosario.petlover.ui
 
-import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
@@ -16,9 +15,9 @@ import androidx.compose.foundation.layout.wrapContentWidth
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.KeyboardActions
 import androidx.compose.foundation.text.KeyboardOptions
+import androidx.compose.material3.Button
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
-import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -35,7 +34,6 @@ import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.tooling.preview.Preview
-import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.TextUnit
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -84,6 +82,7 @@ fun TextFieldComponent(
 
     val localFocusManager = LocalFocusManager.current
     OutlinedTextField(
+        modifier = Modifier.fillMaxWidth(),
         label = { Text(text = "Name", color = Color.Black)},
         value = currentValue,
         onValueChange = {
@@ -124,6 +123,7 @@ fun AnimalCard(
                     color = if (selected) Color.Green else Color.Transparent
                 )
         ){
+            val localFocusManager = LocalFocusManager.current
             Image(
                 modifier = Modifier
                     .padding(5.dp)
@@ -132,11 +132,36 @@ fun AnimalCard(
                     .clickable {
                         val animalName = if (image == R.drawable.pixel_cat) "Cat" else "Dog"
                         animalSelected(animalName) //call it to trigger the function defined inside @Composable
+                        localFocusManager.clearFocus()
                     },
                 painter = painterResource(id = image),
                 contentDescription = "Animal image")
         }
     }
+}
+
+@Composable
+fun ButtonComponent(
+    goToDetailsScreen: () -> Unit
+){
+    Button(
+        modifier = Modifier.fillMaxWidth(),
+        onClick = {
+            goToDetailsScreen()
+        }
+    ) {
+        TextComponent(
+            textValue = "Go to Details Screen",
+            textSize = 18.sp,
+            color = Color.White
+            )
+    }
+}
+
+@Preview(showBackground = false)
+@Composable
+fun ButtonComponentPreview(){
+    ButtonComponent({""})
 }
 
 @Preview(showBackground = false)

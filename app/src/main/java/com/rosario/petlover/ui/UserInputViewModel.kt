@@ -40,4 +40,9 @@ class UserInputViewModel : ViewModel(){
         Log.d(TAG, "${state.animalSelected}")
         return
     }
+
+    fun isValidState(): Boolean{
+        return (!state.nameEntered.isNullOrEmpty()
+                && !state.animalSelected.isNullOrEmpty())
+    }
 }
