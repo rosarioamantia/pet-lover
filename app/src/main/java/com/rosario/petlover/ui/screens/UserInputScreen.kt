@@ -30,7 +30,6 @@ fun UserInputScreen(
     userInputViewModel: UserInputViewModel,
     showWelcomeScreen: (valuesPair: Pair<String, String>) -> Unit
 ){
-
     val context = LocalContext.current
 
     Surface(modifier = Modifier.fillMaxSize()) {

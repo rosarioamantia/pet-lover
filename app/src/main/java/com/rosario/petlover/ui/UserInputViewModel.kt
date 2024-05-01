@@ -45,4 +45,12 @@ class UserInputViewModel : ViewModel(){
         return (!state.nameEntered.isNullOrEmpty()
                 && !state.animalSelected.isNullOrEmpty())
     }
+
+    fun getAnimalEmoji(): String{
+        if(state.animalSelected.equals("Cat")){
+           return "\uD83D\uDC31"
+        }else{
+            return "\uD83D\uDC36"
+        }
+    }
 }
