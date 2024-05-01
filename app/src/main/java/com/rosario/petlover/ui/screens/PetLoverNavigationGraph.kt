@@ -22,11 +22,11 @@ fun PetLoverNavigationGraph(userInputViewModel: UserInputViewModel = viewModel()
                 println("Coming inside show welcome screen")
                 println(it.first)
                 println(it.second)
-                navController.navigate(Routes.WELCOME_SCREEN + "/${it.first}/${it.second}")
+                navController.navigate(Routes.WELCOME_SCREEN + "/${it.first}/${it.second}")  // must match with below
             })
         }
 
-        composable("${Routes.WELCOME_SCREEN}/{${Routes.ANIMAL_SELECTED}}/{${Routes.USER_NAME}}",
+        composable("${Routes.WELCOME_SCREEN}/{${Routes.ANIMAL_SELECTED}}/{${Routes.USER_NAME}}", // must match with above
             arguments = listOf(
                 navArgument(name = Routes.USER_NAME){ type = NavType.StringType},
                 navArgument(name = Routes.ANIMAL_SELECTED){ type = NavType.StringType}
