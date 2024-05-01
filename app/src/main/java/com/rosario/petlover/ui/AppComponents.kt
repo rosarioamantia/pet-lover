@@ -161,7 +161,7 @@ fun ButtonComponent(
 @Preview(showBackground = false)
 @Composable
 fun ButtonComponentPreview(){
-    ButtonComponent({""})
+    //ButtonComponent({""})
 }
 
 @Preview(showBackground = false)

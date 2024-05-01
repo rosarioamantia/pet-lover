@@ -26,10 +26,14 @@ import com.rosario.petlover.ui.TopBar
 import com.rosario.petlover.ui.UserInputViewModel
 
 @Composable
-fun UserInputScreen(userInputViewModel: UserInputViewModel){
+fun UserInputScreen(
+    userInputViewModel: UserInputViewModel,
+    showWelcomeScreen: (valuesPair: Pair<String, String>) -> Unit
+){
+
+    val context = LocalContext.current
 
     Surface(modifier = Modifier.fillMaxSize()) {
-        val context = LocalContext.current
         Column(
             modifier = Modifier
                 .fillMaxSize()
@@ -72,7 +76,7 @@ fun UserInputScreen(userInputViewModel: UserInputViewModel){
                     selected = userInputViewModel.state.animalSelected.equals("Cat")) //read state to trigger border card color logic
                 AnimalCard(
                     R.drawable.pixel_dog,
-                    animalSelected = {//callback insicallback inside {} with Lambda function
+                    animalSelected = {//callback inside {} with Lambda function
                         userInputViewModel.onEvent(
                             UserDataUiAction.AnimalSelected(it) //update state
                         )
@@ -88,14 +92,15 @@ fun UserInputScreen(userInputViewModel: UserInputViewModel){
                         Toast.makeText(context, "called goToDetailsScreen()", Toast.LENGTH_LONG).show()
                         Toast.makeText(context, "your name is ${userInputViewModel.state.nameEntered}" +
                                 " and your animal is a ${userInputViewModel.state.animalSelected}", Toast.LENGTH_LONG).show()
-                })
+                        showWelcomeScreen(
+                            Pair(
+                                userInputViewModel.state.nameEntered,
+                                userInputViewModel.state.animalSelected
+                            )
+                        )
+                    })
             }
         }
     }
 }
 
-@Preview
-@Composable
-fun UserInputScreenPreview(){
-    UserInputScreen(UserInputViewModel())
-}
