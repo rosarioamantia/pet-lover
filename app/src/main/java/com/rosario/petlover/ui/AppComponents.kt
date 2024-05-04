@@ -4,6 +4,7 @@ import androidx.compose.foundation.Image
 import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
@@ -27,14 +28,17 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.rotate
 import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.Shadow
 import androidx.compose.ui.platform.LocalFocusManager
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.TextStyle
+import androidx.compose.ui.text.font.FontStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.ImeAction
+import androidx.compose.ui.text.style.TextDecoration
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.TextUnit
 import androidx.compose.ui.unit.dp
@@ -144,6 +148,37 @@ fun AnimalCard(
 }
 
 @Composable
+fun QuotationCard(quotation: String){
+    Card(
+        modifier = Modifier
+            .padding(32.dp)
+            .fillMaxWidth(),
+        shape = RoundedCornerShape(8.dp),
+        elevation = CardDefaults.cardElevation(4.dp)
+    ) {
+        Column(
+            modifier = Modifier.padding(18.dp, 24.dp)
+        ) {
+            Image(
+                modifier = Modifier
+                    .size(20.dp),
+                contentDescription = "Double quote image",
+                painter = painterResource(id = R.drawable.double_quote))
+
+            TextWithShadow(text = quotation)
+
+            Image(
+                modifier = Modifier
+                    .size(20.dp)
+                    .rotate(180f),
+                contentDescription = "Double quote image",
+                painter = painterResource(id = R.drawable.double_quote))
+        }
+
+    }
+}
+
+@Composable
 fun ButtonComponent(
     goToDetailsScreen: () -> Unit
 ){
@@ -162,10 +197,10 @@ fun ButtonComponent(
 }
 
 @Composable
-fun TextWithShadow(value: String){
+fun TextWithShadow(text: String){
     val shadowOffset = Offset(x = 1f, y = 2f)
     Text(
-        text = value,
+        text = text,
         fontSize = 24.sp,
         fontWeight = FontWeight.Light,
         style = TextStyle(
@@ -202,4 +237,10 @@ fun TextComponentPreview(){
     TextComponent(
         textValue = "This page will prepare a details page based on input provided by you",
         textSize = 18.sp)
+}
+
+@Preview(showBackground = true)
+@Composable
+fun QuotationCardPreview(){
+    QuotationCard(quotation = "Ciaociao")
 }

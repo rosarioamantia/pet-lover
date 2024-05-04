@@ -16,6 +16,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
+import com.rosario.petlover.ui.QuotationCard
 import com.rosario.petlover.ui.TextComponent
 import com.rosario.petlover.ui.TextWithShadow
 import com.rosario.petlover.ui.TopBar
@@ -40,6 +41,10 @@ fun WelcomeScreen(username: String?, animalSelected: String?){
             val finalText = if(animalSelected == "Cat") "You are a Cat Lover \uD83D\uDC31" else "You are a Dog lover \uD83D\uDC36"
 
             TextWithShadow(finalText)
+
+            Spacer(modifier = Modifier.size(40.dp))
+            
+            QuotationCard(quotation = "richiama metodo del view model dopo averlo creato e ottieni la frase corretta in base ad animal selected")
         }
     }
 }

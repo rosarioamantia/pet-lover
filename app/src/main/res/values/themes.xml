@@ -1,5 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <style name="Theme.PetLover" parent="android:Theme.Material.Light.NoActionBar" />
+    <style name="Theme.PetLover" parent="android:Theme.Material.Light.LightStatusBar" />
+
+    <style name="SplashScreenTheme" parent="Theme.SplashScreen">
+        <item name="windowSplashScreenBackground">@color/white</item>
+        <item name="windowSplashScreenAnimatedIcon">@drawable/android_symbol_green</item>
+        <item name="postSplashScreenTheme">@style/Theme.PetLover</item>
+    </style>
 </resources>

@@ -89,8 +89,6 @@ fun UserInputScreen(
                 ButtonComponent(
                     goToDetailsScreen = { //callback inside {} with Lambda function
                         Toast.makeText(context, "called goToDetailsScreen()", Toast.LENGTH_LONG).show()
-                        Toast.makeText(context, "your name is ${userInputViewModel.state.nameEntered}" +
-                                " and your animal is a ${userInputViewModel.state.animalSelected}", Toast.LENGTH_LONG).show()
                         showWelcomeScreen(
                             Pair(
                                 userInputViewModel.state.nameEntered,
