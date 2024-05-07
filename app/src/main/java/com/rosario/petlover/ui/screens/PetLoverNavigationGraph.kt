@@ -10,9 +10,12 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navArgument
 import com.rosario.petlover.ui.UserInputViewModel
+import com.rosario.petlover.ui.WelcomeViewModel
 
 @Composable
-fun PetLoverNavigationGraph(userInputViewModel: UserInputViewModel = viewModel()){
+fun PetLoverNavigationGraph(
+    userInputViewModel: UserInputViewModel = viewModel(),
+    welcomeViewModel: WelcomeViewModel = viewModel()){
     val navController = rememberNavController()
     val context = LocalContext.current
     NavHost(navController = navController, startDestination = Routes.USER_INPUT_SCREEN) {
@@ -36,7 +39,7 @@ fun PetLoverNavigationGraph(userInputViewModel: UserInputViewModel = viewModel()
             val animalSelected = it?.arguments?.getString(Routes.ANIMAL_SELECTED)
             Toast.makeText(context, "Username inserted: ${username}", Toast.LENGTH_LONG).show()
             Toast.makeText(context, "Animal selected: ${animalSelected}", Toast.LENGTH_LONG).show()
-            WelcomeScreen(username, animalSelected)
+            WelcomeScreen(username, animalSelected, welcomeViewModel)
         }
     }
 }

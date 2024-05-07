@@ -21,9 +21,12 @@ import com.rosario.petlover.ui.TextComponent
 import com.rosario.petlover.ui.TextWithShadow
 import com.rosario.petlover.ui.TopBar
 import com.rosario.petlover.ui.UserInputViewModel
+import com.rosario.petlover.ui.WelcomeViewModel
 
 @Composable
-fun WelcomeScreen(username: String?, animalSelected: String?){
+fun WelcomeScreen(
+    username: String?, animalSelected: String?,
+    welcomeViewModel: WelcomeViewModel){
     Surface(
         modifier = Modifier.fillMaxSize()
     ) {
@@ -43,8 +46,9 @@ fun WelcomeScreen(username: String?, animalSelected: String?){
             TextWithShadow(finalText)
 
             Spacer(modifier = Modifier.size(40.dp))
-            
-            QuotationCard(quotation = "richiama metodo del view model dopo averlo creato e ottieni la frase corretta in base ad animal selected")
+
+            QuotationCard(quotation = welcomeViewModel.generateRandomQuotation(animalSelected!!))
+
         }
     }
 }
@@ -52,5 +56,5 @@ fun WelcomeScreen(username: String?, animalSelected: String?){
 @Preview
 @Composable
 fun WelcomeScreenPreview(){
-    WelcomeScreen("Username", "Cat")
+    WelcomeScreen("Username", "Cat", WelcomeViewModel())
 }
